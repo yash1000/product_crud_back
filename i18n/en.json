@@ -1,0 +1,10 @@
+{
+	"success": "success",
+	"internalError": "internalError",
+	"studentExist": "studentExist",
+	"studentValidationEmailRequired": "studentValidationEmailRequired",
+	"studentUpdatedSuccessfully": "studentUpdatedSuccessfully",
+	"mobileAlreadyExist": "mobileAlreadyExist",
+	"studentNotExist": "studentNotExist",
+	"fileIsRequired": "fileIsRequired"
+}
