@@ -6,5 +6,7 @@
 	"studentUpdatedSuccessfully": "studentUpdatedSuccessfully",
 	"mobileAlreadyExist": "mobileAlreadyExist",
 	"studentNotExist": "studentNotExist",
-	"fileIsRequired": "fileIsRequired"
+	"fileIsRequired": "fileIsRequired",
+	"dateUploadSuccess": "dateUploadSuccess",
+	"noDataFound": "noDataFound"
 }

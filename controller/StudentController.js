@@ -70,7 +70,6 @@ module.exports = {
                                 id: student.Department.id
                             }
                         }).then((d) => {
-                            console.log(d)
                             Student.update({
                                 department_id: d.id,
                                 first_name: reqParam.first_name,
@@ -217,8 +216,8 @@ module.exports = {
                         "Last_name": student.last_name,
                         "Address": student.address,
                         "City": student.city,
-                        "mobile": student.mobile,
-                        "email": student.email,
+                        "Mobile": student.mobile,
+                        "Email": student.email,
                         "Department": student.Department.name,
                     })
                 })
@@ -277,7 +276,6 @@ module.exports = {
                     Department.create({
                         name:record.Department
                     }).then((d)=> {
-                        console.log(d)
                         Student.create({
                             department_id:d.id,
                             first_name: record.First_name,
@@ -287,12 +285,6 @@ module.exports = {
                             address: record.Address,
                             email: record.Email,
                             mobile: +record.Mobile
-                        }).then(() => {
-                            return Response.successResponseWithoutData(
-                                res,
-                                res.locals.__('success'),
-                                constant.SUCCESS,
-                            )
                         }).catch((e) => {
                             console.log(e)
                             return Response.errorResponseData(

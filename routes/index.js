@@ -15,7 +15,7 @@ route.post('/add-edit-student', StudentController.addEditStudent)
 route.get('/get-student', StudentController.getStudent)
 route.get('/get-student/:id', StudentController.getOneStudent)
 route.get('/download-student', StudentController.downloadStudent)
-route.get('/import-student', authMiddleware, StudentController.importStudent)
+route.post('/import-student', authMiddleware, StudentController.importStudent)
 
 
 module.exports = route
