@@ -1,21 +1,42 @@
 const route = require('express').Router()
-const StudentController = require('../controller/StudentController')
+const UserController = require('../controller/UserController')
+const ProductController = require('../controller/ProductController')
+const CartController = require('../controller/CartController')
 const connect = require('connect')
-const formidableMiddleware = require('express-formidable')
+// const formidableMiddleware = require('express-formidable')
+const { apiShopTokenAuth, apiTokenAuth } = require('../middleware/api')
 
-const authMiddleware = (() => {
-    const chain = connect()
-    ;[formidableMiddleware()].forEach((middleware) => {
-        chain.use(middleware)
+const authShopMiddleware = (() => {
+    const chain = connect();
+    [apiShopTokenAuth].forEach((middleware) => {
+      chain.use(middleware)
     })
     return chain
-})()
+  })()
+const authMiddleware = (() => {
+    const chain = connect();
+    [apiTokenAuth].forEach((middleware) => {
+      chain.use(middleware)
+    })
+    return chain
+  })()
 
-route.post('/add-edit-student', StudentController.addEditStudent)
-route.get('/get-student', StudentController.getStudent)
-route.get('/get-student/:id', StudentController.getOneStudent)
-route.get('/download-student', StudentController.downloadStudent)
-route.post('/import-student', authMiddleware, StudentController.importStudent)
+//   const authMiddlewareWithFormidable = (() => {
+//     const chain = connect()
+//     ;[formidableMiddleware(), apiTokenAuth].forEach((middleware) => {
+//       chain.use(middleware)
+//     })
+//     return chain
+//   })()
+route.post('/sign-up', UserController.signUp)
+route.post('/sign-in', UserController.signIn)
+route.post('/add-edit-product', authShopMiddleware, ProductController.addEditProduct)
+route.get('/get-products', authMiddleware, ProductController.getProducts)
+route.get('/product/:id', authMiddleware, ProductController.getOneProducts)
+route.post('/add-cart', authMiddleware, CartController.addCart)
+route.get('/get-cart', authMiddleware, CartController.getCart)
+route.post('/delete-cart', authMiddleware, CartController.deleteCart)
+route.delete('/delete-product/:id', authMiddleware, ProductController.deleteProduct)
 
 
 module.exports = route

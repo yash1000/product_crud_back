@@ -18,45 +18,5 @@ module.exports = {
         type = module.exports.toUpperCase(type[1])
         key = apiTag + key + type
         return key
-    },
-    async excelValidation(req, res, file) {
-        return new Promise((resolve) => {
-            const extension = file.type
-            const fileExtArr = [
-                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'application/csv,application/excel',
-                'application/vnd.ms-excel',
-                'application/vnd.msexcel',
-                'application/octet-stream',
-                'text/csv',
-            ]
-            if (file && !fileExtArr.includes(extension)) {
-                return Response.errorResponseWithoutData(
-                    res,
-                    res.__('fileInvalid'),
-                    Constants.BAD_REQUEST
-                )
-            }
-            return resolve(true)
-        })
-    },
-    async uploadFiles(file, paths, filename) {
-        return new Promise((resolve, reject) => {
-            const tempPath = file.path
-            const fileName = filename
-
-            // const newLocation = path.join(__dirname, '../../public/uploads') + '/' + paths + '/'
-            const newLocation = '/tmp/'
-            if (!fs.existsSync(newLocation)) {
-                fs.mkdirSync(newLocation, { recursive: true }, () => {})
-            }
-            fs.copy(tempPath, newLocation + fileName, (err) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(newLocation + fileName)
-                }
-            })
-        })
-    },
+    }
 }
